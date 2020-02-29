@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Canvas Game</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="l-wrapper">
+      <a href="." class="logo">
+        <img src="/img/canvas-game_logo.png" alt="canvas game logo">
+      </a>
+      <a href="https://twitter.com/ahamidEng" class="header_about">about the developer</a>
+      <!-- end logo -->
+    </div>
+    <!-- end layout wrapper -->
+  </header>
+  <main>
+    <div class="fixed-note">
+      <span class="fixed-note_btn">X</span>
+      <p>We noticed that you've resized the window, please reolad the page so that the game fits your new dimensions</p>
+    </div>
+    <div class="l-wrapper">
+      <section class="main_body">
+        <p class="main-intro">Simple and fun game by <a href="https://twitter.com/iamahmedhamed" target="_blank">Ahmed Hamed</a></p>
+        <p class="main_body_note">please notice that this game is just for my learning process<br>so <span class="main_body_note--em">do
+          not</span> expect a lot from it</p>
+      </section>
+      <!-- end main body -->
+      <div class="l-row game">
+        <div class="fixed-note">
+          <span class="fixed-note_btn">X</span>
+          <p>please view the game from your laptop for better experince</p>
+        </div>
+        <div class="l-col-1-4" id="game_body_black-bg">
+          <span id="game_body_btn">X</span>
+          <div class="game_body">
+            <h3>Gmae Config</h3>
+            <div class="balls-speed">
+              <label for="balls-speed_slider">balls speed</label>
+              <input type="range" name="" id="balls-speed_slider" class="default-slider" max="4.4" min="0.2" step="0.1">
+            </div>
+            <!-- end ball speed -->
+            <label for="balls-count" class="is-hidden">count of the balls</label>
+            <input type="number" name="" id="balls-count" class="default-input" placeholder="count of the balls" title="balls count" max="30" min="5" value="14">
+            <label for="balls-color" class="is-hidden">balls color to BOOM!</label>
+            <div class="default-select">
+              <select name="" id="balls-color" title="balls color to BOOM!">
+                <option value="base" disabled selected>balls color to BOOM!</option>
+                <option value="#673AB7">Purple - default</option>
+                <option value="#E91E63">Pink</option>
+                <option value="#00BCD4">Cyan</option>
+              </select>
+              <!-- end ball color -->
+            </div>
+            <!-- end default select -->
+            <label for="cursor-color" class="is-hidden">color of the cursor</label>
+            <div class="default-select">
+              <select name="" id="cursor-color" title="color of the cursor">
+                <option value="base" disabled selected>color of the cursor</option>
+                <option value="#2c3e50">midnightblue - default</option>
+                <option value="#3E2723">Brown</option>
+                <option value="#000000">Black</option>
+                <option value="#ecf0f1">Clouds</option>
+              </select>
+              <!-- end cursor color -->
+            </div>
+            <!-- end default select -->
+            <h3 class="progress-header">Your progress</h3>
+            <div id="progress"></div>
+            <p id="game_progress">Evil balls BOOMed NO: <span id="evil-progress"></span><br>Innocent balls BOOMed NO: <span id="innocent-progress"></span></p>
+            <p id="case-message">you win your final score is <span id="score"></span></p>
+            <!-- end progress -->
+          </div>
+          <!-- end game body -->
+        </div>
+        <!-- end layout col-1-4 and game body black bg-->
+        <h3 id="game-config-btn">Config and progress</h3>
+        <div class="l-col-3-4">
+          <div id="canvas-wrapper">
+            <canvas id="game_canvas" height="500">
+              your browser doesn't support &lt;canvas&gt; element please update your browser or move on to another one
+            </canvas>
+          </div>
+          <!-- end game canvas -->
+        </div>
+        <!-- end layout col-3-4 -->
+      </div>
+      <!-- end layout row and game-->
+    </div>
+    <!-- end layout wrapper -->
+  </main>
+  <footer class="site-footer">
+    <div class="l-wrapper">
+      <section class="social">
+        <h2>follow me to recieve the latest news</h2>
+        <a href="https://twitter.com/ahamidEng" class="social-icon" target="_blanck">
+          <span class="ico fab fa-twitter"></span>
+        </a>
+        <a href="https://facebook.com/ahamidEng" class="social-icon" target="_blanck">
+          <span class="ico fab fa-facebook-f"></span>
+        </a>
+        <!-- end social icon (facebook) -->
+        <a href="https://instagram.com/ahamidEng" class="social-icon" target="_blanck">
+          <span class="ico fab fa-instagram"></span>
+        </a>
+        <!-- end social icon (instagram) -->
+        <a href="https://behance.net/ahamidEng" class="social-icon" target="_blanck">
+          <span class="ico fab fa-behance"></span>
+        </a>
+        <!-- end social icon (behance) -->
+        <a href="https://github.com/ahamidEng" class="social-icon" target="_blanck">
+          <span class="ico fab fa-github"></span>
+        </a>
+        <!-- end social icon (github) -->
+      </section>
+      <!-- end social -->
+      <p class="copyright">Somerights reserved &copy; ahamidEng</p>
+      <!-- end copyrigt -->
+    </div>
+    <!-- end layout wrapper -->
+  </footer>
+
+  <!-- bg music -->
+  <audio src="audio/humbug.mp3" loop id="bg-music"></audio>
+
+  <!-- JAVASCRIPT -->
+  <script src="/js/howler.core.min.js" charset="utf-8"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/canvas.js"></script>
+
+</body>
+
+</html>

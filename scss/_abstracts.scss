@@ -1,0 +1,60 @@
+// FUNCTIONS!!!
+
+// function convert pixels to responsive units (em or rem);
+@function to-rsp($val, $to) {
+  @return (($val * 1px) / $base-font-size) * 1#{$to};
+}
+
+// function to get percentage
+@function get-pct($val) {
+  @return (1 / $val) * 100%;
+}
+
+// VARIABLES!!!
+
+// base font size 
+$base-font-size: 18px;
+
+// grid breakpoint
+$breakpoints: (
+  'small': 768px,
+  'medium': 992px,
+  'large': 1200px,
+);
+
+// colors
+$sidecar: rgb(246, 232, 194);
+$fuel-yellow: rgb(232, 185, 31);
+$scooter: rgb(39, 176, 219);
+$punch: rgb(219, 51, 64);
+
+// fonts
+$base-font: Shadows into light, cursive;
+$ar-font: Tajwal, sans-serif;
+
+// MIXINS
+
+// responsive mixin using media query
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media screen and (min-width: #{map-get($breakpoints, $breakpoint)}){
+      @content;     
+    }
+  }
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+    + "Please make sure it is defined in `$breakpoints` map.";
+  }
+}
+@mixin extra-small {
+  @media screen and (max-width: 767px) {
+    @content; 
+  }
+}
+
+// create circle
+@mixin create-circle($r) {
+  height: $r;
+  width: $r; 
+  @include border-radius($r/2);
+}

@@ -1,0 +1,315 @@
+// My simple grid system (require compass)
+
+$gutter: 16px; // here is the grid gutter
+
+// content wraaper
+.l-wrapper {
+  max-width: 1160px; // control the width of the wrapper
+  margin: 0 auto;
+  padding: 0 $gutter;
+}
+
+// row element to contain the columns
+.l-row {
+  margin: 0 -$gutter;
+  // responde only to small divces but don't use in extra small ones
+  @include respond-to(small) {
+    @include display-flex();
+  }
+}
+
+[class*=l-col-] {
+  padding: 0 $gutter;
+}
+
+// responde only to small divces but don't use in extra small ones
+@include respond-to(small) {
+  //create cols for my grid and pass to each col its own width based on its #N
+  @for $i from 1 to 13 {
+    .l-col-1-#{$i} {
+      @include flex(1 1 get-pct($i));
+    }
+    .l-col-2-#{$i} {
+      @include flex(1 1 get-pct($i/2));
+    }
+    .l-col-3-#{$i} {
+      @include flex(1 1 get-pct($i/3));
+    }
+  }
+}
+// end grid
+
+// HEADER LAYOUT
+.site-header {
+  width: 100%;
+  padding-top: 19px;
+  padding-bottom: 19px;
+
+  background: transparent;
+
+  font-size: to-rsp(18, rem);
+
+  @include extra-small {
+    text-align: center;
+  }
+
+}
+
+// a little tweak to about the develper in the header
+.header_about {
+  float: right;
+  display: inline-block;
+  font-size: to-rsp(24, em);
+  vertical-align: middle;
+
+  // hide in mobile view
+  @include extra-small {
+    display: none;
+  }
+
+}
+
+// MAIN_BODY LAYOUT
+
+.main_body {
+  padding: 40px 0;
+  font-size: to-rsp(18, rem);
+}
+
+// a little tweak to main-intro in the main_body
+.main-intro {
+  margin-top: 40px;
+  margin-bottom: 34px;
+  font-size: to-rsp(48, em);
+  text-align: center;
+  line-height: 74px;
+}
+
+.main_body_note {
+  font-size: to-rsp(20, em);
+  text-align: center;
+  line-height: to-rsp(32, em);
+}
+
+.main_body_note--em {
+  color: $punch;
+  text-decoration: underline;
+}
+
+// GAME LAYOUT
+.game {
+  margin-top: 40px;
+  margin-bottom: 100px;
+  font-size: to-rsp(18 ,rem);
+}
+
+// game config btn to show the game body in mobile view
+#game-config-btn {
+  // hide in desktop view since it will be useless
+  @include respond-to('small') {
+    display: none;
+  }
+
+  display: block;
+  margin-bottom: 32px;
+  text-align: center;
+  color: $scooter;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+}
+
+// the black background for game_body in mobile view
+#game_body_black-bg {
+  display: block; // for desktop always view
+
+  @include extra-small {
+    display: none; // hide in mobile veiw
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(#212121, 0.84);
+  }
+
+}
+
+// the close button in mobile view for game body
+#game_body_btn {
+  display: none; // do not show in desktop view
+
+  @include extra-small {
+    display: block; 
+    width: 30px;
+    position: absolute;
+    z-index: 1;
+    top: 10px;
+    right: 14px;
+
+    font-size: to-rsp(40, em);
+    text-align: center;
+    color: $scooter;
+
+    cursor: pointer;
+  }
+
+}
+
+// game body layout
+.game_body {
+  height: 500px;
+  width: 274px;
+  margin-right: -16px; // I don't want 32px between the game body and the canvas now it just 16px
+  padding: 4px 16px;
+  background: $fuel-yellow;
+
+  > h3 {
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+
+  > .progress-header {
+    margin-top: 4px;
+  }
+
+  > .default-select {
+    margin-bottom: 24px;
+  }
+
+  @include extra-small {
+    height: auto; // set the height to auto in mobile view
+    margin: auto; // center the div horizontally
+    // hack the center the div vertically
+    position: relative;
+    top: 50%;
+    transform: perspective(1px) translateY(-50%);
+
+    background: transparent;
+    text-align: center;
+    color: white;
+
+    input, input::placeholder, select {
+      color: white !important;
+    }
+
+    // for chrome to not show the optoin in white
+    option {
+      color: #212121;
+    }
+
+  }
+
+}
+
+// hide the cursor from game canvas
+#game_canvas {
+  cursor: none;
+}
+
+// set the ball ball speed input properly in game_body
+.balls-speed {
+  height: 36px;
+  margin-bottom: 24px;
+  text-align: left;
+  line-height: 36px;
+
+  label {
+    margin-left: 16px;
+    margin-right: 8px;
+  }
+
+}
+
+// jsut minor tweak in the ball speed slider to make it fit the design
+#balls-speed_slider {
+  max-width: 138px;
+  vertical-align: middle;
+}
+
+// minor tweak in balls count input to make it fit the design
+#balls-count {
+  margin-bottom: 24px;
+}
+
+
+// game canvas style
+.canvas-wrapper {
+  text-align: center;
+}
+
+#game_canvas {
+  background: rgba($fuel-yellow, 0.3);
+}
+
+// FOOTER LAYOUT
+
+.site-footer {
+  background: $fuel-yellow;
+  font-size: to-rsp(18, rem);
+
+  .l-wrapper {
+    padding-top: 28px;
+    padding-bottom: 28px;
+    @include display-flex;
+    @include flex-flow(row wrap);
+    @include justify-content(space-between);
+    @include align-items(center);
+    @include align-content(center);
+
+    @include extra-small {
+      @include justify-content(center);
+    }
+
+  }
+
+}
+
+// social section in the footer
+.social {
+  height: 48px; // to make overflow work properly
+  overflow: hidden; // i don't want all the icons if one of them wrap remove it
+
+  @include extra-small {
+    text-align: center; // center every thing in mobile view
+  }
+
+  // style social header
+  > h2 {
+    display: inline-block;
+    margin: 0;
+    margin-right: 28px;
+    vertical-align: middle;
+    color: $punch;
+    font-size: to-rsp(28, em);
+
+    // remove it in mobile view
+    @include extra-small {
+      display: none;
+    }
+
+  }
+
+  // minor edit in the icnos to make them fit the design
+  > .social-icon {
+    margin-right: 14px;
+  }
+
+}
+
+// minor edit to footer copyright to make it fit the design
+.copyright {
+  vertical-align: middle;
+}
+
+#case-message {
+  display: none;
+  text-transform: uppercase;
+  color: $punch;
+}
+#score {
+  text-decoration: underline;
+}

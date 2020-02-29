@@ -1,0 +1,299 @@
+// logo module
+.logo {
+  display: inline-block;
+  padding: 0;
+  vertical-align: middle;
+
+  img {
+    width: 100%; // make the logo responsive
+  }
+
+}
+
+// social-icon module
+.social-icon {
+  display: inline-block;
+  @include create-circle(48px); // function in abstracts file to make circle
+  background: $scooter;
+
+  text-align: center;
+  line-height: 44px;
+
+  > .ico {
+    display: inline-block;
+
+    vertical-align: middle;
+    font-size: to-rsp(22, em);
+    color: white;
+
+    @include single-transition(all, 0.1s);
+  }
+
+}
+
+// remove the hidden label I hear it's best practise to alaways use label even if you don't need them
+label.is-hidden {
+  display: none;
+}
+
+// the style of this taken from https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/
+// input type range module
+.default-slider {
+  width: 100%;
+  background: transparent; 
+  // delete the default style so our style take its place
+  @include appearance(none); 
+
+  // reomve the foucus from chrome, should be alternative though for accessibility reason
+  &:focus {
+    outline: none; 
+  }
+
+  // delete the default style so our style take its place
+  &::-ms-track {
+    width: 100%;
+    border-color: transparent;
+    background: transparent;
+    color: transparent;
+    cursor: pointer;
+  }
+
+  // style the thumb
+  // specific style for webkit
+  &::-webkit-slider-thumb {
+    @include create-circle(24px);
+    // for chrome only to center the thumb in the slider(create conflict in edge but I fix it in line 132 to 137)
+    margin-top: -5px; 
+    border: none;
+    background: $sidecar;
+    @include appearance(none);
+    cursor: pointer;
+  } 
+
+  // specific style for gecko
+  &::-moz-range-thumb {
+    border: none;
+    @include create-circle(24px);
+    background: $sidecar;
+    @include appearance(none);
+    cursor: pointer;
+  } 
+
+  // for IE
+  &::-ms-thumb {
+    @include create-circle(24px);
+    border: none;
+    background: $sidecar;
+    cursor: pointer;
+  } 
+
+  // style the slider
+  // for webkit
+  &::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 14px;
+    @include border-radius(7px);
+    background: $punch;
+    cursor: pointer;
+  } 
+
+  // for gecko
+  &::-moz-range-track {
+    width: 100%;
+    height: 14px;
+    @include border-radius(7px);
+    background: $punch;
+    cursor: pointer;
+  } 
+
+  // delete the default style in IE to replace it with ours
+  &::-ms-track {
+    width: 100%;
+    height: 14px;
+    border-width: 5px 0; // important so the thumb could be released from the track prison :)
+    border-color: transparent;
+    background: transparent;
+    cursor: pointer;
+  } 
+
+  &::-ms-fill-lower {
+    background: $punch;
+    @include border-radius(7px);
+  }
+
+  &::-ms-fill-upper {
+    @include border-radius(7px);
+    background: $punch;
+  }
+
+}
+
+// hack to fix the conflict in the margin in webkit slider thumb for edge (since edge is the only browser that support ime-align)
+@supports (-ms-ime-align: auto) {
+  .default-slider::-webkit-slider-thumb {
+    margin: auto;
+  }
+} 
+
+// input module
+.default-input {
+  width: 100%;
+  padding: 4px 12px;
+
+  border: none;
+  border-bottom: 1px solid $punch;
+
+  background: none;
+  // remove the default style (and hide the arrow from firefox that's why use 'textfield')
+  @include appearance(textfield); 
+
+  // reomve the arrow from chrome
+  &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+    @include appearance(none);
+    margin: 0;
+  } 
+
+  font-size: to-rsp(18, em);
+  line-height: normal; // override normalize style because it is not supported in select menu in firefox
+  
+  // for edge
+  &::-webkit-input-placeholder {
+    color: #212121;
+    opacity: 1;
+  } 
+
+  // for IE
+  &:-ms-input-placeholder {
+    color: #212121;
+    opacity: 1;
+  } 
+
+  &::placeholder {
+    color: #212121;
+    opacity: 1;
+  }
+
+  // reomve the foucus from chrome, should be alternative though for accessibility reason
+  &:focus {
+    outline: none;
+  } 
+
+}
+
+// select modul
+.default-select {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+
+  border-bottom: 1px solid $punch;
+
+  font-size: to-rsp(18, em);
+
+  position: relative; // should be relative for the icon because it will be set absloute
+  overflow: hidden;
+
+  &::after {
+    display: inline-block; // from fontawesome style 
+
+    background: transparent;
+
+    content:""; // from font awesome icons
+
+    font: {
+      family: 'font awesome 5 free'; // for fontawesom 5
+      size: inherit;
+      weight: bold; // important because the icon in the bold font not the normal
+      style: normal; // from fontawesome style
+      variant: normal; // from fontawesome style
+    }
+
+    text-rendering: auto; // from fontawesome style
+    text-align: center; // from fontawesome style
+    line-height: 1;  // from fontawesome style
+    color: inherit;
+    -moz-osx-font-smoothing: grayscale; // from fontawesome style
+    -webkit-font-smoothing: antialiased; // from fontawesome style
+
+    position: absolute; right: 12px; bottom: 28%; // to set the icon properly in the menu
+    pointer-events: none; // important to remove it event so the event of select menu take it place
+  }
+  select {
+    width: 100%;
+    padding: 4px 12px;
+
+    border: none;
+    
+    background: none;
+    color: #212121;
+
+    // remove the default apperance from gecko and webkti
+    @include appearance(none); 
+    
+    // remove the arrow in IE
+    &::-ms-expand {
+      display: none; 
+    } 
+
+    line-height: normal; // override normalize style because it is not supported in select in firefox
+    
+    // remove the outline from chrome should be alternative though
+    &:focus {
+      outline: none; 
+    }
+
+    // for firefox
+    option {
+      padding: 0; 
+    }
+
+  }
+
+}
+
+// fixed note module
+.fixed-note {
+  // hide by default
+  display: none; 
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+
+  background: rgba(#212121, 0.84);
+
+  font-size: 20px;
+  color: white;
+  text-align: center;
+
+  p {
+    margin: 0;
+    // hack to align it vertically
+    position: relative;
+    top: 50%;
+    transform: perspective(1px) translateY(-50%); 
+
+    font-size: to-rsp(24, em);
+    color: white;
+    line-height: 38px;
+  }
+
+}
+
+// close note btn
+.fixed-note_btn {
+  width: 30px;
+  display: block;
+  position: absolute;
+  z-index: 1; // alaways on top
+  top: 10px;
+  right: 14px;
+
+  font-size: to-rsp(40, em);
+  color: $scooter;
+
+  cursor: pointer;
+}

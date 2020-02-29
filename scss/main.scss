@@ -1,0 +1,23 @@
+// import compass
+@import 'compass';
+
+// import shadows into light and tajwal arabik google font (tajwal arabic font is just as a backup)
+// @import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light|Tajawal');
+
+// import vendors
+@import 'vendors/normalize'; // version 8.0.0 src https://necolas.github.io/normalize.css/
+
+// import helpers
+@import 'abstracts';
+
+// import base style
+@import 'base';
+
+// import site layout
+@import 'layout';
+
+// import site modules
+@import 'modules';
+
+// import the styles that a shamed me :(
+@import 'shame';

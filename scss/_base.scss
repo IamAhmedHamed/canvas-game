@@ -1,0 +1,36 @@
+// hack change the box sizing default value to border-box;
+html {
+	@include box-sizing(border-box);
+	font-size: $base-font-size;
+}
+*, *:after, *:before { @include box-sizing(inherit); }
+
+// body base style
+body {
+	background-color: $sidecar;
+	font: {
+		family: $base-font, $ar-font;
+		size: $base-font-size;
+		weight: normal;
+	}
+	color: #212121;
+}
+h1, h2, h3 {
+	font-weight: normal;
+}
+h1 {
+	font-size: to-rsp(36px, em);
+}
+h2 {
+	font-size: to-rsp(28px, em);
+}
+h3 {
+	font-size: to-rsp(24px, em);
+}
+a, a:visited {
+	color: $scooter;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
